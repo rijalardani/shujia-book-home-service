@@ -32,12 +32,10 @@ class CategoryResource extends Resource
                    
                 FileUpload::make('photo')
                     ->image()
-                    ->disk('public')
                     ->required(),
 
                 FileUpload::make('photo_white')
                     ->image()
-                    ->disk('public')
                     ->required(),
             ]);
     }
@@ -46,8 +44,7 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo')
-                    ->disk('public'),
+                Tables\Columns\ImageColumn::make('photo'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
             ])
