@@ -13,7 +13,7 @@ class ServiceTestimonial extends Model
         'name',
         'home_service_id',
         'photo',
-        'testimonial',
+        'message',
     ];
 
     public function homeService()
