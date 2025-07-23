@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BookingTransactionResource\Pages;
-use App\Filament\Resources\BookingTransactionResource\RelationManagers;
-use App\Models\BookingTransaction;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Models\BookingTransaction;
+use Filament\Forms\Components\Grid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\BookingTransactionResource\Pages;
+use App\Filament\Resources\BookingTransactionResource\RelationManagers;
 
 class BookingTransactionResource extends Resource
 {
@@ -23,7 +24,25 @@ class BookingTransactionResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Wizard::make([
+                    Forms\Components\Wizard\Step::make('Product and Price')
+                        ->completedIcon('heroicon-m-hand-thumb-up')
+                        ->description('Add your product items')
+                        ->schema([
+                            Grid::make(2)
+                            ->schema([
+                                Forms\Components\Repeater::make('transactionDetails')
+                                ->relationship('transactionDetails')
+                                ->schema([
+                                    
+                                ])
+                            ])
+                        ])
+
+                ])
+                ->columnSpan('full')
+                ->columns(1)
+                ->skippable()
             ]);
     }
 
